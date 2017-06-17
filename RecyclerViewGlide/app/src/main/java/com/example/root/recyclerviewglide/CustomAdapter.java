@@ -14,30 +14,28 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public static final int TYPE_HEADER = 1;
     public static final int TYPE_ITEM = 2;
 
-    private List<CustomModel> itemModels;
+    private List<GenericItem> itemModels;
 
     public CustomAdapter() {
         this.itemModels = new ArrayList<>();
     }
 
-    public void addItem(CustomModel item){
+    public void addItem(GenericItem item) {
         itemModels.add(item);
     }
 
-    public void addArrayItems(List<CustomModel> items){
+    public void addArrayItems(List<GenericItem> items) {
         itemModels.addAll(items);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        switch (viewType){
+        switch (viewType) {
             case TYPE_HEADER:
-                View itemView = layoutInflater.inflate(R.layout.item_header, parent, false);
-                return new ViewHolderHeader(itemView);
+                return new ViewHolderHeader(layoutInflater.inflate(R.layout.view_header, parent, false));
             default:
-//                return new ViewHolderItem()
-                return null;
+                return new ViewHolderItem(layoutInflater.inflate(R.layout.view_item, parent, false));
 
         }
     }
@@ -54,23 +52,17 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        int totalSize = 0;
-        for (CustomModel item: itemModels) {
-            totalSize += item.getItems().size();
-        }
-        return totalSize;
+        return itemModels.size();
     }
 
-    static class ViewHolderHeader extends RecyclerView.ViewHolder {
-
-        public ViewHolderHeader(View itemView) {
+    private static class ViewHolderHeader extends RecyclerView.ViewHolder {
+        ViewHolderHeader(View itemView) {
             super(itemView);
         }
     }
 
-    static class ViewHolderItem extends RecyclerView.ViewHolder {
-
-        public ViewHolderItem(View itemView) {
+    private static class ViewHolderItem extends RecyclerView.ViewHolder {
+        ViewHolderItem(View itemView) {
             super(itemView);
         }
     }
