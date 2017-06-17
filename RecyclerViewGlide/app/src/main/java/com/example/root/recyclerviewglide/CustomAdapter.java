@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Based on: http://www.androidhive.info/2016/01/android-working-with-recycler-view/
+ */
+
 
 public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
